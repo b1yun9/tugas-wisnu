@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inventaris Perangkat Lab TKJ</title>
+  <link rel="icon" type="image/svg+xml" href="logo.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=7">
+</head>
+
+<body>
+
+  <!-- ========== INTRO & SPLASH SCREEN ANIMASI ========== -->
+  <div id="splashScreen" class="splash-screen">
+    <div class="splash-bg-grid"></div>
+    <div class="splash-glow-sphere"></div>
+    <canvas id="splashCanvas" class="splash-canvas"></canvas>
+    
+    <div class="splash-content">
+      <div class="splash-logo-container">
+        <div class="splash-radar-sweep"></div>
+        <div class="splash-cyber-ring ring-1"></div>
+        <div class="splash-cyber-ring ring-2"></div>
+        <div class="splash-logo-glow"></div>
+        <img src="logo.svg" alt="Wisnu TKJ Logo" class="splash-logo">
+      </div>
+
+      <div class="splash-badge">
+        <span class="splash-pulse-dot"></span>
+        <span>SISTEM INVENTARIS LAB TKJ ONLINE</span>
+      </div>
+
+      <h1 class="splash-title">INVENTARIS LAB TKJ</h1>
+      <p class="splash-subtitle">Laboratorium Komputer & Jaringan &mdash; Wisnu Sangjaya (XII TKJ 2)</p>
+
+      <div class="splash-terminal">
+        <span class="terminal-prefix">&gt;</span>
+        <span id="splashTerminalText" class="terminal-text">Menginisialisasi sistem laboratorium...</span>
+      </div>
+
+      <div class="splash-progress-wrapper">
+        <div class="splash-progress-bar">
+          <div id="splashProgressFill" class="splash-progress-fill"></div>
+        </div>
+        <div class="splash-progress-info">
+          <span id="splashProgressStatus">MEMUAT SISTEM</span>
+          <span id="splashProgressPercent">0%</span>
+        </div>
+      </div>
+
+      <div class="splash-actions">
+        <button id="btnSkipSplash" class="btn-splash-skip" onclick="tutupSplash()">Buka Dashboard &rarr;</button>
+        <button id="btnToggleSound" class="btn-splash-sound" onclick="toggleSound()" title="Aktifkan / Matikan Efek Suara">
+          <span id="soundIcon">&#128263;</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Canvas Confetti untuk perayaan data baru -->
+  <canvas id="confettiCanvas" class="confetti-canvas"></canvas>
+
+  <!-- ========== HEADER ========== -->
+  <header class="header">
+    <div class="container">
+      <div class="header-content">
+        <div class="header-left">
+          <div class="logo-wrapper">
+            <img src="logo.svg" alt="Wisnu TKJ Logo" class="brand-logo">
+          </div>
+          <div>
+            <h1>Inventaris Lab TKJ</h1>
+            <p>Sistem Pencatatan Perangkat Laboratorium | <strong>Wisnu</strong></p>
+          </div>
+        </div>
+        <div class="header-right">
+          <button id="btnReplayIntro" class="btn-intro-replay" onclick="triggerSplashIntro(true)" title="Putar Ulang Animasi Pembuka">
+            <span class="sparkle-icon">&#10024;</span> Putar Animasi
+          </button>
+          <span id="currentDate"></span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- ========== RINGKASAN ========== -->
+    <div class="ringkasan">
+      <div class="ringkasan-item">
+        <span class="ringkasan-angka" id="statTotal">0</span>
+        <span class="ringkasan-label">Total Perangkat</span>
+      </div>
+      <div class="ringkasan-item baik">
+        <span class="ringkasan-angka" id="statBaik">0</span>
+        <span class="ringkasan-label">Kondisi Baik</span>
+      </div>
+      <div class="ringkasan-item rusak">
+        <span class="ringkasan-angka" id="statRusak">0</span>
+        <span class="ringkasan-label">Kondisi Rusak</span>
+      </div>
+    </div>
+
+    <!-- ========== FORM TAMBAH / EDIT ========== -->
+    <div class="card" id="formCard">
+      <div class="card-header">
+        <h2 id="formTitle">&#10010; Tambah Perangkat Baru</h2>
+        <button class="btn-text" id="btnToggleForm" onclick="toggleForm()">Sembunyikan</button>
+      </div>
+      <div class="card-body" id="formBody">
+        <form id="formPerangkat" onsubmit="simpanPerangkat(event)">
+          <input type="hidden" id="editId" value="">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="inputNama">Nama Perangkat *</label>
+              <input type="text" id="inputNama" required placeholder="Contoh: PC Client Lab 01">
+            </div>
+            <div class="form-group">
+              <label for="inputKategori">Kategori *</label>
+              <select id="inputKategori" required>
+                <option value="">-- Pilih Kategori --</option>
+                <option value="Komputer">Komputer</option>
+                <option value="Router">Router</option>
+                <option value="Switch">Switch</option>
+                <option value="Access Point">Access Point</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="inputMerk">Merk *</label>
+              <input type="text" id="inputMerk" required placeholder="Contoh: Cisco, TP-Link">
+            </div>
+            <div class="form-group">
+              <label for="inputJumlah">Jumlah *</label>
+              <input type="number" id="inputJumlah" required min="1" value="1">
+            </div>
+            <div class="form-group full">
+              <label for="inputSpesifikasi">Spesifikasi</label>
+              <input type="text" id="inputSpesifikasi" placeholder="Contoh: Intel Core i5, 8GB RAM, SSD 256GB">
+            </div>
+            <div class="form-group">
+              <label for="inputKondisi">Kondisi *</label>
+              <select id="inputKondisi" required>
+                <option value="Baik">Baik</option>
+                <option value="Rusak">Rusak</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="inputLokasi">Lokasi *</label>
+              <input type="text" id="inputLokasi" required placeholder="Contoh: Lab TKJ 1 - Rak Jaringan">
+            </div>
+            <div class="form-group">
+              <label for="inputTanggal">Tanggal Masuk *</label>
+              <input type="date" id="inputTanggal" required>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary" id="btnSimpan">Simpan</button>
+            <button type="button" class="btn btn-secondary" id="btnBatalEdit" onclick="batalEdit()" style="display: none;">Batal Edit</button>
+            <button type="button" class="btn btn-secondary" id="btnResetForm" onclick="resetKeDefault()" title="Reset seluruh data LocalStorage ke data default awal (data.json)">Reset</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- ========== PENCARIAN & FILTER ========== -->
+    <div class="card">
+      <div class="card-header">
+        <h2>&#128269; Data Perangkat</h2>
+        <span class="data-count" id="dataCount">0 perangkat</span>
+      </div>
+      <div class="card-body">
+        <div class="filter-bar">
+          <input type="text" id="searchInput" class="input-search" placeholder="Cari nama atau merk..."
+            oninput="filterPerangkat()">
+          <select id="filterKategori" onchange="filterPerangkat()">
+            <option value="">Semua Kategori</option>
+            <option value="Komputer">Komputer</option>
+            <option value="Router">Router</option>
+            <option value="Switch">Switch</option>
+            <option value="Access Point">Access Point</option>
+          </select>
+          <select id="filterKondisi" onchange="filterPerangkat()">
+            <option value="">Semua Kondisi</option>
+            <option value="Baik">Baik</option>
+            <option value="Rusak">Rusak</option>
+          </select>
+        </div>
+
+        <!-- Tabel Desktop -->
+        <div class="table-wrapper">
+          <table class="data-table" id="perangkatTable">
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Nama Perangkat</th>
+                <th>Kategori</th>
+                <th>Merk</th>
+                <th>Jml</th>
+                <th>Kondisi</th>
+                <th>Lokasi</th>
+                <th>Tgl Masuk</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="perangkatTableBody"></tbody>
+          </table>
+        </div>
+
+        <!-- Card list Mobile -->
+        <div class="card-list" id="perangkatCardList"></div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ========== MODAL DETAIL ========== -->
+  <div class="modal-overlay" id="modalOverlay" onclick="tutupModal()">
+    <div class="modal" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <h3 id="modalTitle">Detail Perangkat</h3>
+        <button class="modal-close" onclick="tutupModal()">&times;</button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+      <div class="modal-footer" id="modalDetailFooter">
+        <button type="button" class="btn btn-primary btn-sm" id="btnEditDariDetail" onclick="editDariModalDetail()">
+          &#9998; Edit Perangkat Ini
+        </button>
+        <button type="button" class="btn btn-secondary btn-sm" onclick="tutupModal()">Tutup</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== MODAL EDIT PERANGKAT ========== -->
+  <div class="modal-overlay" id="modalEditOverlay" onclick="tutupModalEdit()">
+    <div class="modal modal-lg" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <h3 id="modalEditTitle">&#9998; Edit Data Perangkat</h3>
+        <button class="modal-close" onclick="tutupModalEdit()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="formEditModal" onsubmit="simpanEditModal(event)">
+          <input type="hidden" id="modalEditId" value="">
+          <div class="form-grid modal-form-grid">
+            <div class="form-group">
+              <label for="modalInputNama">Nama Perangkat *</label>
+              <input type="text" id="modalInputNama" required placeholder="Contoh: PC Client Lab 01">
+            </div>
+            <div class="form-group">
+              <label for="modalInputKategori">Kategori *</label>
+              <select id="modalInputKategori" required>
+                <option value="">-- Pilih Kategori --</option>
+                <option value="Komputer">Komputer</option>
+                <option value="Router">Router</option>
+                <option value="Switch">Switch</option>
+                <option value="Access Point">Access Point</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="modalInputMerk">Merk *</label>
+              <input type="text" id="modalInputMerk" required placeholder="Contoh: Cisco, TP-Link">
+            </div>
+            <div class="form-group">
+              <label for="modalInputJumlah">Jumlah *</label>
+              <input type="number" id="modalInputJumlah" required min="1" value="1">
+            </div>
+            <div class="form-group full">
+              <label for="modalInputSpesifikasi">Spesifikasi</label>
+              <input type="text" id="modalInputSpesifikasi" placeholder="Contoh: Intel Core i5, 8GB RAM, SSD 256GB">
+            </div>
+            <div class="form-group">
+              <label for="modalInputKondisi">Kondisi *</label>
+              <select id="modalInputKondisi" required>
+                <option value="Baik">Baik</option>
+                <option value="Rusak">Rusak</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="modalInputLokasi">Lokasi *</label>
+              <input type="text" id="modalInputLokasi" required placeholder="Contoh: Lab TKJ 1 - Rak Jaringan">
+            </div>
+            <div class="form-group">
+              <label for="modalInputTanggal">Tanggal Masuk *</label>
+              <input type="date" id="modalInputTanggal" required>
+            </div>
+          </div>
+          <div class="modal-form-actions">
+            <button type="button" class="btn btn-secondary" onclick="tutupModalEdit()">Batal</button>
+            <button type="submit" class="btn btn-primary" id="btnSimpanModalEdit">&#128190; Simpan Perubahan</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== TOAST ========== -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container">
+      <p>Proyek Akhir Web Design &mdash; Wisnu Sangjaya XII TKJ 2 &mdash; <span id="footerYear"></span></p>
+    </div>
+  </footer>
+
+  <script src="script.js?v=7"></script>
+</body>
+
+</html>

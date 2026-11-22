@@ -1,0 +1,168 @@
+[
+  {
+    "id": 1,
+    "nama": "PC Client Lab 01",
+    "kategori": "Komputer",
+    "merk": "Lenovo ThinkCentre",
+    "spesifikasi": "Intel Core i5-10400, 8GB RAM, SSD 256GB",
+    "jumlah": 1,
+    "kondisi": "Baik",
+    "lokasi": "Lab TKJ 1 - Meja 01",
+    "tanggalMasuk": "2024-07-15"
+  },
+  {
+    "id": 2,
+    "nama": "PC Client Lab 02",
+    "kategori": "Komputer",
+    "merk": "Lenovo ThinkCentre",
+    "spesifikasi": "Intel Core i5-10400, 8GB RAM, SSD 256GB",
+    "jumlah": 1,
+    "kondisi": "Baik",
+    "lokasi": "Lab TKJ 1 - Meja 02",
+    "tanggalMasuk": "2024-07-15"
+  },
+  {
+    "id": 3,
+    "nama": "PC Client Lab 03",
+    "kategori": "Komputer",
+    "merk": "HP ProDesk 400",
+    "spesifikasi": "Intel Core i3-10100, 4GB RAM, HDD 500GB",
+    "jumlah": 1,
+    "kondisi": "Rusak",
+    "lokasi": "Lab TKJ 1 - Meja 03",
+    "tanggalMasuk": "2023-01-10"
+  },
+  {
+    "id": 4,
+    "nama": "PC Server Utama",
+    "kategori": "Komputer",
+    "merk": "Dell PowerEdge T140",
+    "spesifikasi": "Intel Xeon E-2224, 16GB RAM, HDD 1TB",
+    "jumlah": 1,
+    "kondisi": "Baik",
+    "lokasi": "Lab TKJ 1 - Rak Server",
+    "tanggalMasuk": "2023-06-20"
+  },
+  {
+    "id": 5,
+    "nama": "Router Cisco 2901",
+    "kategori": "Router",
+    "merk": "Cisco",
+    "spesifikasi": "2x GigabitEthernet, 4x HWIC Slots, 512MB RAM",
+    "jumlah": 2,
+    "kondisi": "Baik",
+    "lokasi": "Lab TKJ 1 - Rak Jaringan",
+    "tanggalMasuk": "2024-02-05"
+  },
+  {
+    "id": 6,
+    "nama": "Router MikroTik RB750Gr3",
+    "kategori": "Router",
+    "merk": "MikroTik",
+    "spesifikasi": "5x GigabitEthernet, 256MB RAM, RouterOS L4",
+    "jumlah": 3,
+    "kondisi": "Baik",
+    "lokasi": "Lab TKJ 1 - Rak Jaringan",
+    "tanggalMasuk": "2024-03-12"
+  },
+  {
+    "id": 7,
+    "nama": "Router MikroTik RB941",
+    "kategori": "Router",
+    "merk": "MikroTik",
+    "spesifikasi": "4x FastEthernet, 32MB RAM, RouterOS L4",
+    "jumlah": 1,
+    "kondisi": "Rusak",
+    "lokasi": "Lab TKJ 2 - Meja Praktik",
+    "tanggalMasuk": "2022-08-01"
+  },
+  {
+    "id": 8,
+    "nama": "Switch Cisco Catalyst 2960",
+    "kategori": "Switch",
+    "merk": "Cisco",
+    "spesifikasi": "24x FastEthernet, 2x GigabitEthernet Uplink, Managed",
+    "jumlah": 2,
+    "kondisi": "Baik",
+    "lokasi": "Lab TKJ 1 - Rak Jaringan",
+    "tanggalMasuk": "2024-02-05"
+  },
+  {
+    "id": 9,
+    "nama": "Switch TP-Link TL-SG1024",
+    "kategori": "Switch",
+    "merk": "TP-Link",
+    "spesifikasi": "24x GigabitEthernet, Unmanaged, Rackmount",
+    "jumlah": 1,
+    "kondisi": "Baik",
+    "lokasi": "Lab TKJ 1 - Rak Jaringan",
+    "tanggalMasuk": "2023-11-28"
+  },
+  {
+    "id": 10,
+    "nama": "Switch D-Link DES-1016A",
+    "kategori": "Switch",
+    "merk": "D-Link",
+    "spesifikasi": "16x FastEthernet, Unmanaged",
+    "jumlah": 1,
+    "kondisi": "Rusak",
+    "lokasi": "Lab TKJ 2 - Rak Jaringan",
+    "tanggalMasuk": "2021-05-14"
+  },
+  {
+    "id": 11,
+    "nama": "Access Point TP-Link EAP245",
+    "kategori": "Access Point",
+    "merk": "TP-Link",
+    "spesifikasi": "AC1750, Dual Band, PoE, Ceiling Mount",
+    "jumlah": 2,
+    "kondisi": "Baik",
+    "lokasi": "Lab TKJ 1 - Plafon",
+    "tanggalMasuk": "2024-04-10"
+  },
+  {
+    "id": 12,
+    "nama": "Access Point Ubiquiti UniFi AP AC Lite",
+    "kategori": "Access Point",
+    "merk": "Ubiquiti",
+    "spesifikasi": "AC1200, Dual Band, PoE, Indoor",
+    "jumlah": 1,
+    "kondisi": "Baik",
+    "lokasi": "Lab TKJ 2 - Plafon",
+    "tanggalMasuk": "2024-01-22"
+  },
+  {
+    "id": 13,
+    "nama": "PC Client Lab 04",
+    "kategori": "Komputer",
+    "merk": "Acer Veriton",
+    "spesifikasi": "Intel Core i3-9100, 4GB RAM, HDD 500GB",
+    "jumlah": 1,
+    "kondisi": "Baik",
+    "lokasi": "Lab TKJ 2 - Meja 01",
+    "tanggalMasuk": "2023-03-05"
+  },
+  {
+    "id": 14,
+    "nama": "Access Point MikroTik cAP ac",
+    "kategori": "Access Point",
+    "merk": "MikroTik",
+    "spesifikasi": "AC1200, Dual Band, PoE, Ceiling Mount, RouterOS",
+    "jumlah": 1,
+    "kondisi": "Rusak",
+    "lokasi": "Lab TKJ 2 - Plafon",
+    "tanggalMasuk": "2022-09-18"
+  },
+  {
+    "id": 15,
+    "nama": "Switch HP ProCurve 1810-24G",
+    "kategori": "Switch",
+    "merk": "HP",
+    "spesifikasi": "24x GigabitEthernet, Smart Managed, Rackmount",
+    "jumlah": 1,
+    "kondisi": "Baik",
+    "lokasi": "Lab TKJ 2 - Rak Jaringan",
+    "tanggalMasuk": "2023-07-30"
+  }
+]
+
